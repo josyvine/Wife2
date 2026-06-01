@@ -298,6 +298,15 @@ public class EmployeeCheckInFragment extends Fragment {
         });
     }
 
+    /**
+     * Public method allowing the parent Activity to trigger a status and button refresh [2].
+     */
+    public void refreshCheckInStatus() {
+        if (binding != null) {
+            loadTodayAttendance();
+        }
+    }
+
     private void updateUIBasedOnStatus() {
         if (currentUser == null || assignedLocation == null) return;
 

@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.util.Log;
 import androidx.core.app.NotificationCompat;
+import androidx.core.content.ContextCompat;
 
 /**
  * BroadcastReceiver triggered by AlarmManager to notify employees
@@ -75,11 +76,11 @@ public class CheckInAlarmReceiver extends BroadcastReceiver {
                 notificationManager.notify(NOTIFICATION_ID, builder.build());
             }
 
-            // 5. Safely launch background voice engine service to speak [3]
+            // 5. Safely launch background voice engine service as a foreground intent [3, 4]
             try {
                 Intent serviceIntent = new Intent(context, CheckInVoiceService.class);
                 serviceIntent.putExtra("reminder_type", reminderType);
-                context.startService(serviceIntent);
+                ContextCompat.startForegroundService(context, serviceIntent);
             } catch (Exception e) {
                 Log.e(TAG, "Failed to start background spoken voice engine service", e);
             }

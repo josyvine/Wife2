@@ -24,7 +24,7 @@ android {
       val keystorePath = System.getenv("KEYSTORE_FILE") ?: "${rootDir}/my-upload-key.jks"
       storeFile = file(keystorePath)
       storePassword = System.getenv("KEYSTORE_PASSWORD")
-      keyAlias = System.getenv("KEY_ALIAS") ?: "upload"
+      keyAlias = System.getenv("KEY_ALIAS") ?: "trade"
       keyPassword = System.getenv("KEY_PASSWORD")
     }
     create("debugConfig") {

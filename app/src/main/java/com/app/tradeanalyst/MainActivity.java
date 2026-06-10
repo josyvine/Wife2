@@ -1047,6 +1047,16 @@ public class MainActivity extends AppCompatActivity implements VoiceAssistantBot
         return getChartContext(10);
     }
 
+    @Override
+    public String getLatestPatternCandidate() {
+        return getLatestPatternCandidateJson();
+    }
+
+    public String getLatestPatternCandidateJson() {
+        // Fallback default JSON to satisfy interface compilation and bridge queries
+        return "{}";
+    }
+
     /**
      * Executes local multi-dimensional pattern analysis in a safe, non-blocking asynchronous thread.
      */

@@ -49,13 +49,18 @@ public class ChartPatternManager {
             // Step 3: Optional user notification of identified patterns
             if (response.getSummary() != null && response.getSummary().getBestPattern() != null) {
                 String bestPattern = response.getSummary().getBestPattern();
-                double confidence = response.getSummary().getConfidence();
+                double rawConfidence = response.getSummary().getConfidence();
+                
+                // Dynamically apply AI confidence adjustment and clamp bounds to [0.0, 100.0]
+                double adjustment = response.getAiConfidenceAdjustment();
+                double adjustedConfidence = Math.max(0.0, Math.min(100.0, rawConfidence + adjustment));
+                
                 String recommendation = response.getSummary().getRecommendation();
                 
                 activity.runOnUiThread(() -> {
                     Toast.makeText(activity, 
                         String.format("AI DETECTED: %s (%.0f%% Confidence) -> %s", 
-                            bestPattern.toUpperCase(), confidence, recommendation.toUpperCase()), 
+                            bestPattern.toUpperCase(), adjustedConfidence, recommendation.toUpperCase()), 
                         Toast.LENGTH_LONG).show();
                 });
             }
@@ -180,9 +185,14 @@ public class ChartPatternManager {
                 projectionTargetY = (float) (canvasHeight - (relativePrice * canvasHeight));
             }
 
+            // Dynamically apply AI confidence adjustment and clamp bounds to [0.0, 100.0]
+            double baseConfidence = pattern.getConfidence();
+            double adjustment = sLastActiveResponse.getAiConfidenceAdjustment();
+            double adjustedConfidence = Math.max(0.0, Math.min(100.0, baseConfidence + adjustment));
+
             PatternDrawingModel dynamicModel = new PatternDrawingModel(
                 pattern.getType(),
-                pattern.getConfidence(),
+                adjustedConfidence,
                 pattern.getBias(),
                 pattern.getStartIndex(),
                 pattern.getEndIndex(),

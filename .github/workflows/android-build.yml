@@ -20,15 +20,15 @@ jobs:
 
       - name: Decode Keystore
         run: |
-          echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 --decode > ${{ github.workspace }}/safevoice.jks
+          echo "${{ secrets.KEYSTORE_BASE64 || vars.KEYSTORE_BASE64 }}" | base64 --decode > ${{ github.workspace }}/safevoice.jks
 
       # ADD THIS STEP TO GET YOUR SHA-1 AND SHA-256 KEYS
       - name: Print Keystore SHA Fingerprints
         run: |
           keytool -list -v \
             -keystore ${{ github.workspace }}/safevoice.jks \
-            -alias "${{ secrets.KEY_ALIAS }}" \
-            -storepass "${{ secrets.KEYSTORE_PASSWORD }}"
+            -alias "${{ secrets.KEY_ALIAS || vars.KEY_ALIAS }}" \
+            -storepass "${{ secrets.KEYSTORE_PASSWORD || vars.KEYSTORE_PASSWORD }}"
 
       # Setup a modern version of Gradle on the virtual runner machine compatible with AGP 9.1.1
       - name: Setup Gradle
@@ -48,9 +48,9 @@ jobs:
         run: ./gradlew assembleRelease
         env:
           KEYSTORE_FILE: ${{ github.workspace }}/safevoice.jks
-          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
-          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
-          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD || vars.KEYSTORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.KEY_ALIAS || vars.KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD || vars.KEY_PASSWORD }}
 
       - name: Upload APK
         uses: actions/upload-artifact@v4

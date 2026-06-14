@@ -58,6 +58,9 @@ public class MessageReceiver implements Runnable {
     private void handleControlMessage(String valType, JsonObject json) {
         String peerIp = socket.getInetAddress().getHostAddress();
         
+        // Dynamically update and register client IP address on any control message received
+        ConnectionManager.getInstance(context).updatePeerIpFromAccept(peerIp);
+        
         // Check for Call Signals
         if (valType.startsWith("CALL_") || valType.startsWith("VIDEO_CALL_")) {
             CallSignalingManager.getInstance(context).handleReceivedSignal(valType, json, peerIp);
@@ -72,7 +75,7 @@ public class MessageReceiver implements Runnable {
 
         if ("handshake".equals(valType)) {
             Log.d(TAG, "Handshake received, client ip updated.");
-            ConnectionManager.getInstance(context).updatePeerIpFromAccept(peerIp);
+            // ConnectionManager.getInstance(context).updatePeerIpFromAccept(peerIp); // Redundant now as it is executed on method entry
         }
     }
 

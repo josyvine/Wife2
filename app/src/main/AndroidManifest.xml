@@ -16,6 +16,7 @@
     <!-- Calling requirements -->
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
 
     <!-- Android 13+ Bluetooth & Wifi P2P nearby device searching requirements -->
     <uses-permission android:name="android.permission.NEARBY_WIFI_DEVICES" 

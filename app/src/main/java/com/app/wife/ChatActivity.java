@@ -26,8 +26,11 @@ public class ChatActivity extends AppCompatActivity implements ChatManager.Messa
         binding = ActivityChatBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        WifeLogger.log("ChatActivity", "onCreate() invoked. Constructing Chat Session UI components.");
+
         db = RoomDatabaseManager.getInstance(this);
         selfId = Utils.getDeviceId(this);
+        WifeLogger.log("ChatActivity", "Local Hardware Signature ID resolved: " + selfId);
 
         setupToolbar();
         setupRecyclerView();
@@ -35,8 +38,11 @@ public class ChatActivity extends AppCompatActivity implements ChatManager.Messa
         binding.btnSendChatMessage.setOnClickListener(v -> {
             String text = binding.etChatMessage.getText().toString().trim();
             if (!TextUtils.isEmpty(text)) {
+                WifeLogger.log("ChatActivity", "User triggered SEND button. Outgoing text length: " + text.length());
                 MessageSender.getInstance(this).sendMessage(text);
                 binding.etChatMessage.setText("");
+            } else {
+                WifeLogger.log("ChatActivity", "User tapped SEND button, but text input field was empty.");
             }
         });
 
@@ -48,10 +54,14 @@ public class ChatActivity extends AppCompatActivity implements ChatManager.Messa
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
-        binding.toolbarChat.setNavigationOnClickListener(v -> onBackPressed());
+        binding.toolbarChat.setNavigationOnClickListener(v -> {
+            WifeLogger.log("ChatActivity", "Navigation back button clicked. Exiting Chat Session.");
+            onBackPressed();
+        });
     }
 
     private void setupRecyclerView() {
+        WifeLogger.log("ChatActivity", "Initializing ChatAdapter and binding LayoutManager to RecyclerView.");
         adapter = new ChatAdapter(this, messagesList);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setStackFromEnd(true); // Always align chats from the bottom up like modern chats
@@ -60,21 +70,30 @@ public class ChatActivity extends AppCompatActivity implements ChatManager.Messa
     }
 
     private void loadHistory() {
-        // Query database on separate or main thread allowed
-        List<MessageEntity> history = db.messageDao().getAllMessages();
-        messagesList.clear();
-        
-        // Reverse because we queried DESC from database for chronological ordering in list
-        for (int i = history.size() - 1; i >= 0; i--) {
-            messagesList.add(history.get(i));
+        WifeLogger.log("ChatActivity", "Accessing local SQLite database to load chat logs...");
+        try {
+            // Query database on separate or main thread allowed
+            List<MessageEntity> history = db.messageDao().getAllMessages();
+            messagesList.clear();
+            
+            WifeLogger.log("ChatActivity", "Successfully retrieved " + history.size() + " messages from Room database.");
+            
+            // Reverse because we queried DESC from database for chronological ordering in list
+            for (int i = history.size() - 1; i >= 0; i--) {
+                messagesList.add(history.get(i));
+            }
+            
+            adapter.notifyDataSetChanged();
+            scrollToBottom();
+            WifeLogger.log("ChatActivity", "Dataset loaded and adapter notifications dispatched.");
+        } catch (Exception e) {
+            WifeLogger.log("ChatActivity", "Failed to query local database chat history: " + e.getMessage(), e);
         }
-        
-        adapter.notifyDataSetChanged();
-        scrollToBottom();
     }
 
     private void scrollToBottom() {
         if (!messagesList.isEmpty()) {
+            WifeLogger.log("ChatActivity", "Scrolling list view focus to position index: " + (messagesList.size() - 1));
             binding.rvChatHistory.smoothScrollToPosition(messagesList.size() - 1);
         }
     }
@@ -82,21 +101,29 @@ public class ChatActivity extends AppCompatActivity implements ChatManager.Messa
     @Override
     protected void onResume() {
         super.onResume();
+        WifeLogger.log("ChatActivity", "onResume() invoked. Registering ChatActivity observer to ChatManager listener list.");
         ChatManager.getInstance(this).registerMessageListener(this);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
+        WifeLogger.log("ChatActivity", "onPause() invoked. Unregistering ChatActivity observer from ChatManager listener list.");
         ChatManager.getInstance(this).unregisterMessageListener(this);
     }
 
     @Override
     public void onMessageReceived(MessageEntity message) {
+        WifeLogger.log("ChatActivity", "onMessageReceived callback triggered on ChatActivity. From: " + message.getSender() + " | Text: " + message.getText());
         runOnUiThread(() -> {
-            messagesList.add(message);
-            adapter.notifyDataSetChanged();
-            scrollToBottom();
+            try {
+                messagesList.add(message);
+                adapter.notifyDataSetChanged();
+                scrollToBottom();
+                WifeLogger.log("ChatActivity", "Real-time list update redrawn. Current list size: " + messagesList.size());
+            } catch (Exception e) {
+                WifeLogger.log("ChatActivity", "Error rendering real-time message bubble update: " + e.getMessage(), e);
+            }
         });
     }
 }

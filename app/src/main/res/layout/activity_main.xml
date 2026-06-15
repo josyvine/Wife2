@@ -130,27 +130,18 @@
                     android:textColor="@color/editorial_primary_dark"
                     android:layout_marginBottom="8dp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="This offline mesh network links dynamic peer devices using WiFi-Direct without cellular data or internet limits.\n\nSwipe open the slider drawer from left to reveal system logs, details, and properties, or tap the sliding horizontal menu below to connect."
-                    android:textSize="13sp"
-                    android:textColor="@color/editorial_text_secondary"
-                    android:gravity="center"
-                    android:lineSpacingMultiplier="1.2" />
-
             </LinearLayout>
 
         </com.google.android.material.card.MaterialCardView>
 
-        <!-- Horizontal Scrollable Footer Menu Container -->
+        <!-- Horizontal Scrollable Footer Menu Container (Ultra-Compact) -->
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/footerContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="12dp"
-            app:cardCornerRadius="20dp"
-            app:cardElevation="2dp"
+            android:layout_margin="8dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="0dp"
             app:strokeColor="@color/editorial_border"
             app:strokeWidth="1dp"
             app:cardBackgroundColor="@color/editorial_surface"
@@ -160,18 +151,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="8dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="6dp"
-                    android:layout_marginBottom="6dp"
-                    android:text="P2P SERVICES (Swipe Left &amp; Right)"
-                    android:textSize="9sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/editorial_text_secondary"
-                    android:letterSpacing="0.1" />
+                android:padding="4dp">
 
                 <HorizontalScrollView
                     android:layout_width="match_parent"
@@ -184,18 +164,17 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
                         android:gravity="center_vertical"
-                        android:paddingHorizontal="2dp">
+                        android:paddingHorizontal="1dp">
 
                         <!-- Scan Nearby Card -->
                         <com.google.android.material.card.MaterialCardView
                             android:id="@+id/btnDiscovery"
-                            android:layout_width="88dp"
-                            android:layout_height="88dp"
-                            android:layout_margin="4dp"
-                            app:cardCornerRadius="16dp"
+                            android:layout_width="74dp"
+                            android:layout_height="66dp"
+                            android:layout_margin="2dp"
+                            app:cardCornerRadius="12dp"
                             app:cardElevation="0dp"
-                            app:strokeWidth="1dp"
-                            app:strokeColor="@color/editorial_border"
+                            app:strokeWidth="0dp"
                             app:cardBackgroundColor="@color/editorial_background"
                             android:clickable="true"
                             android:focusable="true"
@@ -205,18 +184,18 @@
                                 android:layout_height="match_parent"
                                 android:orientation="vertical"
                                 android:gravity="center"
-                                android:padding="6dp">
+                                android:padding="4dp">
                                 <ImageView
-                                    android:layout_width="24dp"
-                                    android:layout_height="24dp"
+                                    android:layout_width="20dp"
+                                    android:layout_height="20dp"
                                     android:src="@drawable/nearby_24px"
                                     app:tint="@color/editorial_accent" />
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginTop="4dp"
+                                    android:layout_marginTop="2dp"
                                     android:text="Scan Nearby"
-                                    android:textSize="10sp"
+                                    android:textSize="9sp"
                                     android:textColor="@color/editorial_primary_dark"
                                     android:textStyle="bold"
                                     android:gravity="center" />
@@ -226,13 +205,12 @@
                         <!-- Secure Chat Card -->
                         <com.google.android.material.card.MaterialCardView
                             android:id="@+id/btnTextChat"
-                            android:layout_width="88dp"
-                            android:layout_height="88dp"
-                            android:layout_margin="4dp"
-                            app:cardCornerRadius="16dp"
+                            android:layout_width="74dp"
+                            android:layout_height="66dp"
+                            android:layout_margin="2dp"
+                            app:cardCornerRadius="12dp"
                             app:cardElevation="0dp"
-                            app:strokeWidth="1dp"
-                            app:strokeColor="@color/editorial_border"
+                            app:strokeWidth="0dp"
                             app:cardBackgroundColor="@color/editorial_background"
                             android:clickable="true"
                             android:focusable="true"
@@ -242,18 +220,18 @@
                                 android:layout_height="match_parent"
                                 android:orientation="vertical"
                                 android:gravity="center"
-                                android:padding="6dp">
+                                android:padding="4dp">
                                 <ImageView
-                                    android:layout_width="24dp"
-                                    android:layout_height="24dp"
+                                    android:layout_width="20dp"
+                                    android:layout_height="20dp"
                                     android:src="@drawable/shield_24px"
                                     app:tint="@color/editorial_accent" />
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginTop="4dp"
+                                    android:layout_marginTop="2dp"
                                     android:text="Secure Chat"
-                                    android:textSize="10sp"
+                                    android:textSize="9sp"
                                     android:textColor="@color/editorial_primary_dark"
                                     android:textStyle="bold"
                                     android:gravity="center" />
@@ -263,13 +241,12 @@
                         <!-- Voice Session Call Card -->
                         <com.google.android.material.card.MaterialCardView
                             android:id="@+id/btnDirectCall"
-                            android:layout_width="88dp"
-                            android:layout_height="88dp"
-                            android:layout_margin="4dp"
-                            app:cardCornerRadius="16dp"
+                            android:layout_width="74dp"
+                            android:layout_height="66dp"
+                            android:layout_margin="2dp"
+                            app:cardCornerRadius="12dp"
                             app:cardElevation="0dp"
-                            app:strokeWidth="1dp"
-                            app:strokeColor="@color/editorial_border"
+                            app:strokeWidth="0dp"
                             app:cardBackgroundColor="@color/editorial_background"
                             android:clickable="true"
                             android:focusable="true"
@@ -279,18 +256,18 @@
                                 android:layout_height="match_parent"
                                 android:orientation="vertical"
                                 android:gravity="center"
-                                android:padding="6dp">
+                                android:padding="4dp">
                                 <ImageView
-                                    android:layout_width="24dp"
-                                    android:layout_height="24dp"
+                                    android:layout_width="20dp"
+                                    android:layout_height="20dp"
                                     android:src="@drawable/voice_chat_24px"
                                     app:tint="@color/editorial_accent" />
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginTop="4dp"
+                                    android:layout_marginTop="2dp"
                                     android:text="Voice Session"
-                                    android:textSize="10sp"
+                                    android:textSize="9sp"
                                     android:textColor="@color/editorial_primary_dark"
                                     android:textStyle="bold"
                                     android:gravity="center" />
@@ -300,13 +277,12 @@
                         <!-- Video Session Call Card -->
                         <com.google.android.material.card.MaterialCardView
                             android:id="@+id/btnVideoCall"
-                            android:layout_width="88dp"
-                            android:layout_height="88dp"
-                            android:layout_margin="4dp"
-                            app:cardCornerRadius="16dp"
+                            android:layout_width="74dp"
+                            android:layout_height="66dp"
+                            android:layout_margin="2dp"
+                            app:cardCornerRadius="12dp"
                             app:cardElevation="0dp"
-                            app:strokeWidth="1dp"
-                            app:strokeColor="@color/editorial_border"
+                            app:strokeWidth="0dp"
                             app:cardBackgroundColor="@color/editorial_background"
                             android:clickable="true"
                             android:focusable="true"
@@ -316,18 +292,18 @@
                                 android:layout_height="match_parent"
                                 android:orientation="vertical"
                                 android:gravity="center"
-                                android:padding="6dp">
+                                android:padding="4dp">
                                 <ImageView
-                                    android:layout_width="24dp"
-                                    android:layout_height="24dp"
+                                    android:layout_width="20dp"
+                                    android:layout_height="20dp"
                                     android:src="@drawable/video_chat_24px"
                                     app:tint="@color/editorial_accent" />
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginTop="4dp"
+                                    android:layout_marginTop="2dp"
                                     android:text="Video Session"
-                                    android:textSize="10sp"
+                                    android:textSize="9sp"
                                     android:textColor="@color/editorial_primary_dark"
                                     android:textStyle="bold"
                                     android:gravity="center" />
@@ -337,13 +313,12 @@
                         <!-- Transfer Files Card -->
                         <com.google.android.material.card.MaterialCardView
                             android:id="@+id/btnFileShare"
-                            android:layout_width="88dp"
-                            android:layout_height="88dp"
-                            android:layout_margin="4dp"
-                            app:cardCornerRadius="16dp"
+                            android:layout_width="74dp"
+                            android:layout_height="66dp"
+                            android:layout_margin="2dp"
+                            app:cardCornerRadius="12dp"
                             app:cardElevation="0dp"
-                            app:strokeWidth="1dp"
-                            app:strokeColor="@color/editorial_border"
+                            app:strokeWidth="0dp"
                             app:cardBackgroundColor="@color/editorial_background"
                             android:clickable="true"
                             android:focusable="true"
@@ -353,18 +328,18 @@
                                 android:layout_height="match_parent"
                                 android:orientation="vertical"
                                 android:gravity="center"
-                                android:padding="6dp">
+                                android:padding="4dp">
                                 <ImageView
-                                    android:layout_width="24dp"
-                                    android:layout_height="24dp"
+                                    android:layout_width="20dp"
+                                    android:layout_height="20dp"
                                     android:src="@drawable/mobile_share_stack_24px"
                                     app:tint="@color/editorial_accent" />
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginTop="4dp"
+                                    android:layout_marginTop="2dp"
                                     android:text="Transfer Files"
-                                    android:textSize="10sp"
+                                    android:textSize="9sp"
                                     android:textColor="@color/editorial_primary_dark"
                                     android:textStyle="bold"
                                     android:gravity="center" />

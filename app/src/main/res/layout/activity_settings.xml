@@ -49,12 +49,85 @@
                         android:textSize="14sp"
                         android:textColor="@color/editorial_primary_dark" />
 
+                    <!-- Profile Photo Selection Block -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_marginTop="16dp">
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:layout_width="64dp"
+                            android:layout_height="64dp"
+                            app:cardCornerRadius="32dp"
+                            app:cardElevation="0dp"
+                            app:strokeColor="@color/editorial_border"
+                            app:strokeWidth="1dp"
+                            app:cardBackgroundColor="@color/editorial_background">
+
+                            <ImageView
+                                android:id="@+id/ivSettingsProfilePhoto"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:scaleType="centerCrop"
+                                android:src="@android:drawable/sym_def_app_icon"
+                                android:contentDescription="My Profile Photo" />
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_marginStart="16dp">
+
+                            <Button
+                                android:id="@+id/btnUploadProfilePhoto"
+                                android:layout_width="wrap_content"
+                                android:layout_height="40dp"
+                                android:text="Upload Photo"
+                                android:textSize="11sp"
+                                android:paddingHorizontal="12dp"
+                                android:backgroundTint="@color/editorial_accent"
+                                android:textColor="#FFFFFF"
+                                android:textStyle="bold" />
+
+                            <Button
+                                android:id="@+id/btnRemoveProfilePhoto"
+                                android:layout_width="wrap_content"
+                                android:layout_height="40dp"
+                                android:layout_marginTop="4dp"
+                                android:text="Remove"
+                                android:textSize="11sp"
+                                android:paddingHorizontal="12dp"
+                                android:backgroundTint="#F44336"
+                                android:textColor="#FFFFFF"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <!-- Public/Private Profile Photo Toggle -->
+                    <androidx.appcompat.widget.SwitchCompat
+                        android:id="@+id/switchProfilePrivacy"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:text="Broadcast Profile Photo to Peers"
+                        android:textColor="@color/editorial_text_primary"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/editorial_border"
+                        android:layout_marginVertical="16dp" />
+
                     <EditText
                         android:id="@+id/etDeviceName"
                         android:layout_width="match_parent"
                         android:layout_height="52dp"
-                        android:layout_marginTop="12dp"
-                        android:hint="Change alias..."
+                        android:hint="Set username alias..."
                         android:paddingHorizontal="12dp"
                         android:background="@android:drawable/editbox_background_normal"
                         android:textColor="@color/editorial_text_primary"
